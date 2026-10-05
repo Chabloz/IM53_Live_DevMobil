@@ -16,10 +16,7 @@ for (let nbCircles=0; nbCircles<100; nbCircles++) {
 ctx.canvas.width = ctx.canvas.clientWidth;
 ctx.canvas.height = ctx.canvas.clientHeight;
 
-
-
 let lastTime = 0;
-let frame = 0;
 
 function tick(time) {
   frame++;
@@ -28,10 +25,14 @@ function tick(time) {
   const dt = time - lastTime;
   lastTime = time;
 
+  // World update
+  circles.forEach(c => c.update(dt));
+
+  // Erase all
   ctx.canvas.width = ctx.canvas.clientWidth;
   ctx.canvas.height = ctx.canvas.clientHeight;
 
-  circles.forEach(c => c.update(dt));
+  // World rendering
   circles.forEach(c => c.draw(ctx));
 }
 
