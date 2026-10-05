@@ -34,7 +34,7 @@ function tick(time) {
   // if (frame%2==0)  {
     // une manière de faire le "nettoyage"
     //ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
-    // une autre plus reponsive :
+    // une autre plus responsive :
     ctx.canvas.width = ctx.canvas.clientWidth;
     ctx.canvas.height = ctx.canvas.clientHeight;
     draw()
