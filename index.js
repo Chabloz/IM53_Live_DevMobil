@@ -6,10 +6,10 @@ const ctx = canvas.getContext("2d");
 const TAU = 2 * Math.PI;
 
 const circles = [];
-for (let nbCircle=0; nbCircle<100; nbCircle++) {
+for (let nbCircles=0; nbCircles<100; nbCircles++) {
   circles.push(new Circle({
     radius: 10,
-    velocity: Vector2.fromAngle(TAU/Math.random()*9)
+    velocity: Vector2.fromAngle(TAU/(Math.random()*9))
   }));
 }
 
