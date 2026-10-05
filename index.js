@@ -1,22 +1,22 @@
+import Circle from "./class/Circle.js";
+import Vector2 from "./class/Vector2.js";
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext("2d");
 const TAU = 2 * Math.PI;
 
-// console.log(canvas);
-// console.log(ctx);
+const circles = [];
+for (let nbCircle=0; nbCircle<100; nbCircle++) {
+  circles.push(new Circle({
+    radius: 10,
+    velocity: Vector2.fromAngle(TAU/Math.random()*9)
+  }));
+}
 
 ctx.canvas.width = ctx.canvas.clientWidth;
 ctx.canvas.height = ctx.canvas.clientHeight;
 
-let x = 0;
 
-function draw() {
-  ctx.beginPath();
-  ctx.fillStyle = "tomato"
-  ctx.arc(x, 75, 50, 0, 2 * Math.PI);
-  ctx.fill();
-  ctx.closePath();
-}
 
 let lastTime = 0;
 let frame = 0;
@@ -27,18 +27,12 @@ function tick(time) {
 
   const dt = time - lastTime;
   lastTime = time;
-  x += 0.1 * dt;
 
-  console.log(dt)
+  ctx.canvas.width = ctx.canvas.clientWidth;
+  ctx.canvas.height = ctx.canvas.clientHeight;
 
-  // if (frame%2==0)  {
-    // une manière de faire le "nettoyage"
-    //ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
-    // une autre plus responsive :
-    ctx.canvas.width = ctx.canvas.clientWidth;
-    ctx.canvas.height = ctx.canvas.clientHeight;
-    draw()
-  // }
+  circles.forEach(c => c.update(dt));
+  circles.forEach(c => c.draw(ctx));
 }
 
-requestAnimationFrame(tick)
+requestAnimationFrame(tick);
