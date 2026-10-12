@@ -15,7 +15,7 @@ export default class Circle {
   }
 
   update(dt) {
-    this.pos.add(this.velocity);
+    this.pos.add(this.velocity.clone().multiply(dt));
   }
 
   draw(ctx) {

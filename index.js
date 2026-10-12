@@ -1,5 +1,8 @@
 import Circle from "./class/Circle.js";
 import Vector2 from "./class/Vector2.js";
+import Keyboard from "./class/Keyboard.js";
+
+const keyManager = new Keyboard();
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext("2d");
@@ -16,24 +19,21 @@ for (let nbCircles=0; nbCircles<100; nbCircles++) {
 ctx.canvas.width = ctx.canvas.clientWidth;
 ctx.canvas.height = ctx.canvas.clientHeight;
 
-let lastTime = 0;
 
-function tick(time) {
-  frame++;
-  requestAnimationFrame(tick);
-
-  const dt = time - lastTime;
-  lastTime = time;
-
-  // World update
-  circles.forEach(c => c.update(dt));
-
-  // Erase all
-  ctx.canvas.width = ctx.canvas.clientWidth;
-  ctx.canvas.height = ctx.canvas.clientHeight;
-
-  // World rendering
-  circles.forEach(c => c.draw(ctx));
+function tickUpdate(dt) {
+  console.log(dt);
+  // if (keyManager.isKeyDown("KeyF")) {
+    circles.forEach(c => c.update(dt));
+  // }
 }
 
-requestAnimationFrame(tick);
+function tickDraw() {
+  ctx.canvas.width = ctx.canvas.clientWidth;
+  ctx.canvas.height = ctx.canvas.clientHeight;
+  circles.forEach(c => c.draw(ctx));
+}
+MainLoop.setSimulationTimestep(1000/30);
+MainLoop
+  .setUpdate(tickUpdate)
+  .setDraw(tickDraw)
+  .start()
