@@ -29,6 +29,7 @@ for (let nbCircles=0; nbCircles<1; nbCircles++) {
 function tickUpdate(dt) {
   tweensManager.update(dt);
   circles.forEach(c => c.update(dt, ctx.canvas.width));
+  automaton.applyRules()
 }
 
 function tickDraw() {
@@ -37,7 +38,7 @@ function tickDraw() {
   circles.forEach(c => c.draw(ctx));
 }
 
-MainLoop.setSimulationTimestep(1000/30);
+MainLoop.setSimulationTimestep(1000);
 MainLoop
   .setUpdate(tickUpdate)
   .setDraw(tickDraw)
